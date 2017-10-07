@@ -1,7 +1,6 @@
 package ch.fhnw.edu.rental.model;
 
-
-public abstract class PriceCategory {
+public abstract class PriceCategory implements Entity {
 	private Long id;
 
 	public Long getId() {
@@ -9,6 +8,10 @@ public abstract class PriceCategory {
 	}
 
 	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public PriceCategory(Long id) {
 		this.id = id;
 	}
 

@@ -1,12 +1,17 @@
 package ch.fhnw.edu.rental.persistence.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import ch.fhnw.edu.rental.model.Movie;
 import ch.fhnw.edu.rental.model.PriceCategory;
 import ch.fhnw.edu.rental.model.PriceCategoryChildren;
 import ch.fhnw.edu.rental.model.PriceCategoryNewRelease;
@@ -14,28 +19,14 @@ import ch.fhnw.edu.rental.model.PriceCategoryRegular;
 import ch.fhnw.edu.rental.persistence.PriceCategoryRepository;
 
 @Component
-public class PriceCategoryRepositoryImpl implements PriceCategoryRepository {
-	private Map<Long, PriceCategory> data = new HashMap<Long, PriceCategory>();
-	private long nextId = 1;
+public class PriceCategoryRepositoryImpl extends JDBCBaseClass<PriceCategory> implements PriceCategoryRepository> {
 
 	@SuppressWarnings("unused")
-	private void initData () {
-		data.clear();
-		nextId = 1;
+	private void initData() {
+
 		save(new PriceCategoryRegular());
 		save(new PriceCategoryChildren());
 		save(new PriceCategoryNewRelease());
-	}
-	
-	@Override
-	public PriceCategory findOne(Long id) {
-		if(id == null) throw new IllegalArgumentException();
-		return data.get(id);
-	}
-
-	@Override
-	public List<PriceCategory> findAll() {
-		return new ArrayList<PriceCategory>(data.values());
 	}
 
 	@Override
@@ -48,26 +39,25 @@ public class PriceCategoryRepositoryImpl implements PriceCategoryRepository {
 
 	@Override
 	public void delete(PriceCategory priceCategory) {
-		if(priceCategory == null) throw new IllegalArgumentException();
+		if (priceCategory == null)
+			throw new IllegalArgumentException();
 		data.remove(priceCategory.getId());
 		priceCategory.setId(null);
 	}
 
-	@Override
-	public void delete(Long id) {
-		if(id == null) throw new IllegalArgumentException();
-		delete(findOne(id));
-	}
-
-	@Override
-	public boolean exists(Long id) {
-		if(id == null) throw new IllegalArgumentException();
-		return data.get(id) != null;
-	}
-
-	@Override
-	public long count() {
-		return data.size();
+	protected PriceCategory createEntity(ResultSet rs) throws SQLException {
+		long id = rs.getLong("PRICECATEGORY_ID ");
+		String type = rs.getString("PRICECATEGORY_TYPE");
+		switch (type)
+		{
+		case "Children": return new PriceCategoryChildren(id);
+		break;
+		case "New Release": return new PriceCategoryNewRelease(id);
+		break;
+		case "Regular": return new PriceCategoryRegular(id);
+		break;
+		}
+		return null;
 	}
 
 }

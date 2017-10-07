@@ -17,80 +17,50 @@ import ch.fhnw.edu.rental.persistence.MovieRepository;
 import ch.fhnw.edu.rental.persistence.PriceCategoryRepository;
 
 @Component
-public class MovieRepositoryImpl implements MovieRepository {
-    @Autowired
-    private JdbcTemplate template;
-    @Autowired
-    private PriceCategoryRepository priceCategoryRepo;
+public class MovieRepositoryImpl extends JDBCBaseClass<Movie> implements MovieRepository {
 
-    @Override
-    public Movie findOne(Long id) {
-        if (id == null)
-            throw new IllegalArgumentException();
-        return template.query("select * from MOVIES where MOVIE_ID = ?", (rs, row) -> createMovie(rs), id).get(0);
-    }
+	@Autowired
+	private PriceCategoryRepository priceCategoryRepo;
 
-    private Movie createMovie(ResultSet rs) throws SQLException {
-        long priceCategory = rs.getLong("PRICECATEGORY_FK");
-        long id = rs.getLong("MOVIE_ID");
-        boolean rented = rs.getBoolean("MOVIE_RENTED");
-        Movie m = new Movie(rs.getString("MOVIE_TITLE"), rs.getDate("MOVIE_RELEASEDATE"),
-                priceCategoryRepo.findOne(priceCategory));
-        m.setId(id);
-        m.setRented(rented);
-        return m;
-    }
+	public MovieRepositoryImpl() {
+		tableName = "MOVIES";
+		identtyFieldname = "MOVIE_ID";
+	}
 
-    @Override
-    public List<Movie> findAll() {
-        return template.query("select * from MOVIES", (rs, row) -> createMovie(rs));
-    }
+	protected Movie createEntity(ResultSet rs) throws SQLException {
+		long priceCategory = rs.getLong("PRICECATEGORY_FK");
+		long id = rs.getLong("MOVIE_ID");
+		boolean rented = rs.getBoolean("MOVIE_RENTED");
+		Movie m = new Movie(rs.getString("MOVIE_TITLE"), rs.getDate("MOVIE_RELEASEDATE"),
+				priceCategoryRepo.findOne(priceCategory));
+		m.setId(id);
+		m.setRented(rented);
+		return m;
+	}
 
-    @Override
-    public List<Movie> findByTitle(String name) {
-        return template.query("select * from MOVIES where MOVIE_TITLE = ?", (rs, row) -> createMovie(rs), name);
-    }
+	@Override
+	public List<Movie> findByTitle(String name) {
+		return template.query("select * from " + tableName + " where MOVIE_TITLE = ?", (rs, row) -> createEntity(rs),
+				name);
+	}
 
-    @Override
-    public Movie save(Movie movie) {
-        if (!exists(movie.getId())) {
+	@Override
+	public Movie save(Movie movie) {
+		if (!exists(movie.getId())) {
+			movie.setId(getLastUsedId() + 1);
 
-        } else {
-            template.update(
-                    "UPDATE MOVIES SET MOVIE_TITLE=?, MOVIE_RELEASEDATE=?,MOVIE_RENTED=?, PRICECATEGORY_FK=? where MOVIE_ID=?",
-                    movie.getTitle(), movie.getReleaseDate(), movie.isRented(), movie.getPriceCategory().getId(),
-                    movie.getId());
-        }
-        return movie;
-    }
-
-    @Override
-    public void delete(Movie movie) {
-        if (movie == null)
-            throw new IllegalArgumentException();
-        movie.setId(null);
-    }
-
-    @Override
-    public void delete(Long id) {
-        if (id == null)
-            throw new IllegalArgumentException();
-        delete(findOne(id));
-    }
-
-    @Override
-    public boolean exists(Long id) {
-        if (id == null)
-            throw new IllegalArgumentException();
-        return !template
-                .query("SELECT TOP 1 MOVIE_ID FROM MOVIES WHERE MOVIE_ID = :id", (rs, row) -> createMovie(rs), id)
-                .isEmpty();
-    }
-
-    @Override
-    public long count() {
-        return template.query("SELECT COUNT(*) as Cnt FROM MOVIES", (rs, row) -> rs.getLong("Cnt")).get(0);
-
-    }
-
+			template.update(
+					"INSERT INTO " + tableName
+							+ "(MOVIE_ID, MOVIE_RELEASEDATE, MOVIE_TITLE, MOVIE_RENTED, PRICECATEGORY_FK) "
+							+ "VALUES (?,?,?,?,?)",
+					movie.getId(), movie.getReleaseDate(), movie.getTitle(), movie.isRented(),
+					movie.getPriceCategory().getId());
+		} else {
+			template.update(
+					"UPDATE MOVIES SET MOVIE_TITLE=?, MOVIE_RELEASEDATE=?,MOVIE_RENTED=?, PRICECATEGORY_FK=? where MOVIE_ID=?",
+					movie.getTitle(), movie.getReleaseDate(), movie.isRented(), movie.getPriceCategory().getId(),
+					movie.getId());
+		}
+		return movie;
+	}
 }

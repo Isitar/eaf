@@ -2,7 +2,7 @@ package ch.fhnw.edu.rental.model;
 
 import java.util.Date;
 
-public class Movie {
+public class Movie implements Entity{
 	private Long id;
 	
 	private final String title;

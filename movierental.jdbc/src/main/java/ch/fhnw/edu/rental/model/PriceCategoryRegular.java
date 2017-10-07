@@ -3,6 +3,10 @@ package ch.fhnw.edu.rental.model;
 
 public class PriceCategoryRegular extends PriceCategory {
 
+	public PriceCategoryRegular(Long id) {
+		super(id);
+	}
+
 	@Override
 	public double getCharge(int daysRented) {
 		double result = 2;
