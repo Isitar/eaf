@@ -32,6 +32,7 @@ public class Rental implements Entity {
 	}
 
 	public Rental(Long id, User user, Movie movie, int rentalDays, Date rentalDate) {
+		this.id = id;
 		this.user = user;
 		this.movie = movie;
 		this.rentalDays = rentalDays;
@@ -103,4 +104,13 @@ public class Rental implements Entity {
 		this.rentalDays = rentalDays;
 	}
 
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof Rental)) {
+			return false;
+		}
+		Rental otherRental = (Rental) other;
+		return otherRental.user.getId().equals(user.getId()) && otherRental.movie.getId().equals(movie.getId())
+				&& otherRental.rentalDate.equals(rentalDate) && otherRental.rentalDays == rentalDays;
+	}
 }

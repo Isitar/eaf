@@ -3,7 +3,7 @@ package ch.fhnw.edu.rental.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Entity{
+public class User implements Entity {
 	private Long id;
 
 	private String lastName;
@@ -14,6 +14,7 @@ public class User implements Entity{
 	public User(String lastName, String firstName) {
 		this.lastName = lastName;
 		this.firstName = firstName;
+		this.email = "";
 		this.rentals = new ArrayList<>();
 	}
 
@@ -63,6 +64,21 @@ public class User implements Entity{
 			result += rental.getMovie().getPriceCategory().getCharge(rental.getRentalDays());
 		}
 		return result;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof User)) {
+			return false;
+		}
+		User otherUser = (User) other;
+		boolean matches = otherUser.email.equals(email) && otherUser.firstName.equals(firstName)
+				&& otherUser.id.equals(id) && otherUser.lastName.equals(lastName);
+
+		if (otherUser.rentals == null) {
+			return matches && rentals == null;
+		}
+		return matches && otherUser.rentals.equals(rentals);
 	}
 
 }

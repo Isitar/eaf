@@ -49,7 +49,7 @@ public class RentalRepositoryImpl extends JDBCBaseClass<Rental> implements Renta
 	@Override
 	public List<Rental> findByUser(User user) {
 
-		return template.query("select * from " + tableName + " where USER_ID=?", (rs, row) -> createEntity(rs),
+		return template.query("select * from " + tableName + " where USER_ID=?", (rs, row) -> createEntity(rs, user),
 				user.getId());
 	}
 
@@ -77,14 +77,29 @@ public class RentalRepositoryImpl extends JDBCBaseClass<Rental> implements Renta
 	@Override
 	protected Rental createEntity(ResultSet rs) throws SQLException {
 		long userId = rs.getLong("USER_ID");
+		return createEntity(rs, userRepo.findOne(userId));
+		//
+		// long userId = rs.getLong("USER_ID");
+		// long movieId = rs.getLong("MOVIE_ID");
+		//
+		// long rentalId = rs.getLong("RENTAL_ID");
+		//
+		// Rental rental = new Rental(rentalId,userRepo.findOne(userId),
+		// movieRepo.findOne(movieId), rs.getInt("RENTAL_RENTALDAYS"),
+		// rs.getDate("RENTAL_RENTALDATE"));
+		//
+		// return rental;
+	}
+
+	protected Rental createEntity(ResultSet rs, User u) throws SQLException {
+
 		long movieId = rs.getLong("MOVIE_ID");
 
 		long rentalId = rs.getLong("RENTAL_ID");
 
-		Rental rental = new Rental(rentalId,userRepo.findOne(userId), movieRepo.findOne(movieId), rs.getInt("RENTAL_RENTALDAYS"),
+		Rental rental = new Rental(rentalId, u, movieRepo.findOne(movieId), rs.getInt("RENTAL_RENTALDAYS"),
 				rs.getDate("RENTAL_RENTALDATE"));
-		
+
 		return rental;
 	}
-
 }

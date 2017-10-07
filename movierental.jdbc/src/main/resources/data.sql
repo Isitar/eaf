@@ -13,7 +13,7 @@ insert into users (user_id, user_name, user_firstname, user_email) values (2, 'K
 insert into users (user_id, user_name, user_firstname, user_email) values (3, 'Meyer', 'Barbara', 'barbara.meyer@gmail.com');
 insert into users (user_id, user_name, user_firstname, user_email) values (4, 'Kummer', 'Adolf', 'adolf.kummer@gmail.com');
 
-insert into rentals (rental_id, movie_id, user_id, rental_rentaldate, rental_rentaldays) values (1, 1, 1, '2017-10-01', 7);
+insert into rentals (rental_id, movie_id, user_id, rental_rentaldate, rental_rentaldays) values (1, 1, 1, '2017-10-01', 10);
 insert into rentals (rental_id, movie_id, user_id, rental_rentaldate, rental_rentaldays) values (2, 2, 1, '2017-10-01', 365);
 insert into rentals (rental_id, movie_id, user_id, rental_rentaldate, rental_rentaldays) values (3, 3, 3, '2017-10-01', 365);
 

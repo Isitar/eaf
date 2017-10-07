@@ -18,6 +18,9 @@ import ch.fhnw.edu.rental.persistence.UserRepository;
 @Component
 public class UserRepositoryImpl extends JDBCBaseClass<User> implements UserRepository {
 
+	@Autowired
+	RentalRepository rentalRepository;
+	
 	public UserRepositoryImpl() {
 		tableName = "USERS";
 		identtyFieldname = "USER_ID";
@@ -77,6 +80,8 @@ public class UserRepositoryImpl extends JDBCBaseClass<User> implements UserRepos
 		User user = new User(rs.getString("user_name"), rs.getString("user_firstname"));
 		user.setEmail(rs.getString("user_email"));
 		user.setId(rs.getLong("user_id"));
+		
+		user.setRentals(rentalRepository.findByUser(user));
 		return user;
 	}
 

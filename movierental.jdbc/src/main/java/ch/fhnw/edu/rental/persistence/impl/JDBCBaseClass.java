@@ -38,6 +38,7 @@ public abstract class JDBCBaseClass<T extends Entity> {
 	public void delete(Long id) {
 		if (id == null)
 			throw new IllegalArgumentException();
+
 		template.update("DELETE FROM " + tableName + " WHERE " + identtyFieldname + " = ?", id);
 	}
 
