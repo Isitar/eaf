@@ -1,5 +1,7 @@
 package ch.fhnw.edu.rental.persistence.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,22 +16,20 @@ import ch.fhnw.edu.rental.persistence.RentalRepository;
 import ch.fhnw.edu.rental.persistence.UserRepository;
 
 @Component
-public class UserRepositoryImpl implements UserRepository {
-	private Map<Long,User> data = new HashMap<Long,User>();
-	private long nextId = 1;
-	
-	@Autowired
-	private RentalRepository rentalRepo;
-	
+public class UserRepositoryImpl extends JDBCBaseClass<User> implements UserRepository {
+
+	public UserRepositoryImpl() {
+		tableName = "USERS";
+		identtyFieldname = "USER_ID";
+	}
+
 	@SuppressWarnings("unused")
-	private void initData () {
-		data.clear();
-		nextId = 1;
+	private void initData() {
 		save(new User("Keller", "Marc"));
 		save(new User("Knecht", "Werner"));
 		save(new User("Meyer", "Barbara"));
 		save(new User("Kummer", "Adolf"));
-		
+
 		findOne(1L).setEmail("marc.keller@gmail.com");
 		findOne(2L).setEmail("werner.knecht@gmail.com");
 		findOne(3L).setEmail("barbara.meyer@gmail.com");
@@ -37,76 +37,47 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public User findOne(Long id) {
-		if(id == null) throw new IllegalArgumentException();
-		return data.get(id);
-	}
-
-	@Override
-	public List<User> findAll() {
-		return new ArrayList<User>(data.values());
-	}
-
-	@Override
 	public User save(User user) {
-		if (user.getId() == null)
-			user.setId(nextId++);
-		data.put(user.getId(), user);
+		if (!exists(user.getId())) {
+			user.setId(getLastUsedId() + 1);
+
+			template.update(
+					"INSERT INTO " + tableName + "(user_id, user_name, user_firstname, user_email) "
+							+ "VALUES (?,?,?,?)",
+					user.getId(), user.getLastName(), user.getFirstName(), user.getEmail());
+		} else {
+			template.update(
+					"UPDATE " + tableName + " SET movie_id=?, user_name=?, user_firstname=?, user_email=? where "
+							+ identtyFieldname + "=?",
+					user.getLastName(), user.getFirstName(), user.getEmail(), user.getId());
+		}
 		return user;
 	}
 
 	@Override
-	public void delete(User user) {
-		if(user == null) throw new IllegalArgumentException();
-		for(Rental r : user.getRentals()){
-			rentalRepo.delete(r);
-		}
-		data.remove(user.getId());
-		user.setId(null);
-	}
-
-	@Override
-	public void delete(Long id) {
-		if(id == null) throw new IllegalArgumentException();
-		delete(findOne(id));
-	}
-
-	@Override
-	public boolean exists(Long id) {
-		if(id == null) throw new IllegalArgumentException();
-		return data.get(id) != null;
-	}
-
-	@Override
-	public long count() {
-		return data.size();
-	}
-
-	@Override
 	public List<User> findByLastName(String lastName) {
-		List<User> result = new ArrayList<>();
-		for(User u : data.values()){
-			if(u.getLastName().equals(lastName)) result.add(u);
-		}
-		return result;
+		return template.query("select * from " + tableName + " where user_name=?", (rs, row) -> createEntity(rs),
+				lastName);
 	}
 
 	@Override
 	public List<User> findByFirstName(String firstName) {
-		List<User> result = new ArrayList<>();
-		for(User u : data.values()){
-			if(u.getFirstName().equals(firstName)) result.add(u);
-		}
-		return result;
+		return template.query("select * from " + tableName + " where user_firstname=?", (rs, row) -> createEntity(rs),
+				firstName);
 	}
 
 	@Override
 	public List<User> findByEmail(String email) {
-		List<User> result = new ArrayList<>();
-		for(User u : data.values()){
-			if(u.getEmail().equals(email)) result.add(u);
-		}
-		return result;
+		return template.query("select * from " + tableName + " where user_email=?", (rs, row) -> createEntity(rs),
+				email);
+	}
+
+	@Override
+	protected User createEntity(ResultSet rs) throws SQLException {
+		User user = new User(rs.getString("user_name"), rs.getString("user_firstname"));
+		user.setEmail(rs.getString("user_email"));
+		user.setId(rs.getLong("user_id"));
+		return user;
 	}
 
 }

@@ -13,7 +13,7 @@ import ch.fhnw.edu.rental.gui.MovieRentalApplicationGui;
 public class MovieRentalApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(MovieRentalApplication.class).headless(false).web(false).run(args);
+        new SpringApplicationBuilder(MovieRentalApplication.class).headless(false).web(true).run(args);
     }
 
     @Value("${gui:true}")

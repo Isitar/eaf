@@ -3,15 +3,14 @@ package ch.fhnw.edu.rental.model;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class Rental implements Entity {
 	private Long id;
-	
+
 	private Movie movie;
 	private User user;
 	private Date rentalDate;
 	private int rentalDays;
-	
+
 	public Rental(User user, Movie movie, int rentalDays) {
 		if (user == null || movie == null || rentalDays <= 0) {
 			throw new NullPointerException("not all input parameters are set!" + user + "/" + movie + "/" + rentalDays);
@@ -26,12 +25,19 @@ public class Rental implements Entity {
 		this.rentalDays = rentalDays;
 		this.rentalDate = Calendar.getInstance().getTime();
 	}
-	
+
 	public Rental(User user, Movie movie, int rentalDays, Date rentalDate) {
 		this(user, movie, rentalDays);
 		this.setRentalDate(rentalDate);
 	}
-	
+
+	public Rental(Long id, User user, Movie movie, int rentalDays, Date rentalDate) {
+		this.user = user;
+		this.movie = movie;
+		this.rentalDays = rentalDays;
+		this.rentalDate = rentalDate;
+	}
+
 	public int calcRemainingDaysOfRental(Date date) {
 		if (date == null) {
 			throw new NullPointerException("given date is not set!");
@@ -46,10 +52,10 @@ public class Rental implements Entity {
 		int actDay = calendar.get(Calendar.DAY_OF_YEAR);
 		int actYear = calendar.get(Calendar.YEAR);
 		int diffDay = endDay - actDay;
-		if (max!=365) {
-			return 366*(endYear-actYear) + diffDay;
+		if (max != 365) {
+			return 366 * (endYear - actYear) + diffDay;
 		} else {
-			return 365*(endYear-actYear) + diffDay;
+			return 365 * (endYear - actYear) + diffDay;
 		}
 	}
 
@@ -79,7 +85,7 @@ public class Rental implements Entity {
 
 	public void setId(Long id) {
 		this.id = id;
-	}	
+	}
 
 	public void setMovie(Movie movie) {
 		this.movie = movie;

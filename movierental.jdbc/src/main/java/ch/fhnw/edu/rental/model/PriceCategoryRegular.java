@@ -1,7 +1,9 @@
 package ch.fhnw.edu.rental.model;
 
-
 public class PriceCategoryRegular extends PriceCategory {
+
+	public PriceCategoryRegular() {
+	}
 
 	public PriceCategoryRegular(Long id) {
 		super(id);

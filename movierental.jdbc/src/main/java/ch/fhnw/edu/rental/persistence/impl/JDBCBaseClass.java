@@ -42,18 +42,19 @@ public abstract class JDBCBaseClass<T extends Entity> {
 	}
 
 	public boolean exists(Long id) {
-		if (id == null)
-			throw new IllegalArgumentException();
-		return !template.query("SELECT TOP 1 * FROM " + tableName + " WHERE " + identtyFieldname + " = :id",
+		if (id == null) {
+			return false;
+		}
+		return !template.query("SELECT TOP 1 * FROM " + tableName + " WHERE " + identtyFieldname + " = ?",
 				(rs, row) -> createEntity(rs), id).isEmpty();
 	}
 
 	public long count() {
 		return template.query("SELECT COUNT(*) as Cnt FROM " + tableName, (rs, row) -> rs.getLong("Cnt")).get(0);
 	}
-	
-	protected long getLastUsedId()
-	{
-		return template.query("SELECT MAX(" + identtyFieldname + ") ad maxId FROM " + tableName, (rs, row) -> rs.getLong("maxId")).get(0);
+
+	protected long getLastUsedId() {
+		return template.query("SELECT MAX(" + identtyFieldname + ") as maxId FROM " + tableName,
+				(rs, row) -> rs.getLong("maxId")).get(0);
 	}
 }

@@ -1,6 +1,6 @@
 insert into pricecategories (pricecategory_id, pricecategory_type) values (1, 'Regular');
 insert into pricecategories (pricecategory_id, pricecategory_type) values (2, 'Children');
-insert into pricecategories (pricecategory_id, pricecategory_type) values (3, 'NewRelease');
+insert into pricecategories (pricecategory_id, pricecategory_type) values (3, 'New Release');
 
 insert into movies (movie_id, movie_releasedate, movie_title, movie_rented, pricecategory_fk) values (1, '2017-05-11', 'Marie Curie', true, 1);
 insert into movies (movie_id, movie_releasedate, movie_title, movie_rented, pricecategory_fk) values (2, '2017-07-20', 'Curchill', true, 1);

@@ -19,7 +19,12 @@ import ch.fhnw.edu.rental.model.PriceCategoryRegular;
 import ch.fhnw.edu.rental.persistence.PriceCategoryRepository;
 
 @Component
-public class PriceCategoryRepositoryImpl extends JDBCBaseClass<PriceCategory> implements PriceCategoryRepository> {
+public class PriceCategoryRepositoryImpl extends JDBCBaseClass<PriceCategory> implements PriceCategoryRepository {
+
+	public PriceCategoryRepositoryImpl() {
+		tableName = "pricecategories";
+		identtyFieldname = "pricecategory_id";
+	}
 
 	@SuppressWarnings("unused")
 	private void initData() {
@@ -31,31 +36,28 @@ public class PriceCategoryRepositoryImpl extends JDBCBaseClass<PriceCategory> im
 
 	@Override
 	public PriceCategory save(PriceCategory category) {
-		if (category.getId() == null)
-			category.setId(nextId++);
-		data.put(category.getId(), category);
+		if (!exists(category.getId())) {
+			category.setId(getLastUsedId() + 1);
+
+			template.update("INSERT INTO " + tableName + "(pricecategory_id, pricecategory_type) " + "VALUES (?,?)",
+					category.getId(), category.toString());
+		} else {
+			template.update("UPDATE " + tableName + " SET pricecategory_type=? where " + identtyFieldname + "=?",
+					category.toString(), category.getId());
+		}
 		return category;
 	}
 
-	@Override
-	public void delete(PriceCategory priceCategory) {
-		if (priceCategory == null)
-			throw new IllegalArgumentException();
-		data.remove(priceCategory.getId());
-		priceCategory.setId(null);
-	}
-
 	protected PriceCategory createEntity(ResultSet rs) throws SQLException {
-		long id = rs.getLong("PRICECATEGORY_ID ");
+		long id = rs.getLong("PRICECATEGORY_ID");
 		String type = rs.getString("PRICECATEGORY_TYPE");
-		switch (type)
-		{
-		case "Children": return new PriceCategoryChildren(id);
-		break;
-		case "New Release": return new PriceCategoryNewRelease(id);
-		break;
-		case "Regular": return new PriceCategoryRegular(id);
-		break;
+		switch (type) {
+		case "Children":
+			return new PriceCategoryChildren(id);
+		case "New Release":
+			return new PriceCategoryNewRelease(id);
+		case "Regular":
+			return new PriceCategoryRegular(id);
 		}
 		return null;
 	}

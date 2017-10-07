@@ -1,7 +1,9 @@
 package ch.fhnw.edu.rental.model;
 
-
 public class PriceCategoryChildren extends PriceCategory {
+
+	public PriceCategoryChildren() {
+	}
 
 	public PriceCategoryChildren(Long id) {
 		super(id);

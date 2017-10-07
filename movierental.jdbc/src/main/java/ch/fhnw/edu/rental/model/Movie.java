@@ -2,9 +2,9 @@ package ch.fhnw.edu.rental.model;
 
 import java.util.Date;
 
-public class Movie implements Entity{
+public class Movie implements Entity {
 	private Long id;
-	
+
 	private final String title;
 	private final Date releaseDate;
 	private boolean rented;
@@ -19,7 +19,7 @@ public class Movie implements Entity{
 		this.priceCategory = priceCategory;
 		this.rented = false;
 	}
-	
+
 	public PriceCategory getPriceCategory() {
 		return priceCategory;
 	}
@@ -31,11 +31,11 @@ public class Movie implements Entity{
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public Date getReleaseDate() {
 		return releaseDate;
 	}
-	
+
 	public boolean isRented() {
 		return rented;
 	}
@@ -50,6 +50,16 @@ public class Movie implements Entity{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof Movie)) {
+			return false;
+		}
+		Movie otherMovie = (Movie) other;
+		return otherMovie.title.equals(title) && otherMovie.id.equals(id) && otherMovie.releaseDate.equals(releaseDate)
+				&& otherMovie.rented == rented && otherMovie.priceCategory.equals(priceCategory);
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import ch.fhnw.edu.rental.model.Movie;
+import ch.fhnw.edu.rental.model.PriceCategory;
 import ch.fhnw.edu.rental.persistence.MovieRepository;
 import ch.fhnw.edu.rental.persistence.PriceCategoryRepository;
 
