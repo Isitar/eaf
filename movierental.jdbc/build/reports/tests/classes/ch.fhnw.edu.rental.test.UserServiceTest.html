@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class ch.fhnw.edu.rental.test.UserServiceTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class ch.fhnw.edu.rental.test.UserServiceTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/ch.fhnw.edu.rental.test.html">ch.fhnw.edu.rental.test</a> &gt; UserServiceTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">8</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">1</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.179s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures" id="successRate">
+<div class="percent">87%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Tests</a>
+</li>
+<li>
+<a href="#tab2">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="testDeleteUser"></a>
+<h3 class="failures">testDeleteUser</h3>
+<span class="code">
+<pre>org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM USERS WHERE USER_ID = ?]; Referentielle Integrität verletzt: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;
+Referential integrity constraint violation: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;; SQL statement:
+DELETE FROM USERS WHERE USER_ID = ? [23503-196]; nested exception is org.h2.jdbc.JdbcSQLException: Referentielle Integrität verletzt: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;
+Referential integrity constraint violation: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;; SQL statement:
+DELETE FROM USERS WHERE USER_ID = ? [23503-196]
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:243)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:73)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:649)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:870)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:931)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:941)
+	at ch.fhnw.edu.rental.persistence.impl.JDBCBaseClass.delete(JDBCBaseClass.java:42)
+	at ch.fhnw.edu.rental.persistence.impl.JDBCBaseClass.delete(JDBCBaseClass.java:35)
+	at ch.fhnw.edu.rental.persistence.impl.UserRepositoryImpl.delete(UserRepositoryImpl.java:18)
+	at ch.fhnw.edu.rental.services.impl.UserServiceImpl.deleteUser(UserServiceImpl.java:57)
+	at ch.fhnw.edu.rental.test.UserServiceTest.testDeleteUser(UserServiceTest.java:67)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:114)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:57)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:377)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:54)
+	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:40)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.jdbc.JdbcSQLException: Referentielle Integrität verletzt: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;
+Referential integrity constraint violation: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;; SQL statement:
+DELETE FROM USERS WHERE USER_ID = ? [23503-196]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.constraint.ConstraintReferential.checkRow(ConstraintReferential.java:425)
+	at org.h2.constraint.ConstraintReferential.checkRowRefTable(ConstraintReferential.java:442)
+	at org.h2.constraint.ConstraintReferential.checkRow(ConstraintReferential.java:317)
+	at org.h2.table.Table.fireConstraints(Table.java:980)
+	at org.h2.table.Table.fireAfterRow(Table.java:998)
+	at org.h2.command.dml.Delete.update(Delete.java:101)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:101)
+	at org.h2.command.Command.executeUpdate(Command.java:260)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:164)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:150)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.tomcat.jdbc.pool.StatementFacade$StatementProxy.invoke(StatementFacade.java:114)
+	at com.sun.proxy.$Proxy78.executeUpdate(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$2.doInPreparedStatement(JdbcTemplate.java:877)
+	at org.springframework.jdbc.core.JdbcTemplate$2.doInPreparedStatement(JdbcTemplate.java:870)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:633)
+	... 57 more
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">testCreateUser</td>
+<td>0.016s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testDeleteRental</td>
+<td>0.049s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="failures">testDeleteUser</td>
+<td>0.033s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="success">testGetAllUsers</td>
+<td>0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetEmailAddress</td>
+<td>0.012s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetRentalsOfUserUsingLazyLoading</td>
+<td>0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetUsersByName</td>
+<td>0.037s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testSaveUser</td>
+<td>0.010s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2017-10-09 08:16:12.356  INFO 9148 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ch.fhnw.edu.rental.test.UserServiceTest], using SpringBootContextLoader
+2017-10-09 08:16:12.358  INFO 9148 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ch.fhnw.edu.rental.test.UserServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-10-09 08:16:12.358  INFO 9148 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ch.fhnw.edu.rental.test.UserServiceTest]: UserServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2017-10-09 08:16:12.368  INFO 9148 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ch.fhnw.edu.rental.MovieRentalApplication for test class ch.fhnw.edu.rental.test.UserServiceTest
+2017-10-09 08:16:12.375  INFO 9148 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2017-10-09 08:16:12.386  INFO 9148 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7057f95f, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7f931049, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6cf60c50, org.springframework.test.context.support.DirtiesContextTestExecutionListener@73511010, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3c039224, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5b75dcb5, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@7bdcf07, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@7c178e70, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5ca5a164, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@29c04e31, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@40ec69f9, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@480b9a]
+2017-10-09 08:16:12.419  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@127ba773, testMethod = testSaveUser@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@49f77c52]; rollback [true]
+2017-10-09 08:16:12.428  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@127ba773, testMethod = testSaveUser@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]].
+2017-10-09 08:16:12.430  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@efcaf0c, testMethod = testGetAllUsers@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@49f77c52]; rollback [true]
+2017-10-09 08:16:12.439  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@efcaf0c, testMethod = testGetAllUsers@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]].
+2017-10-09 08:16:12.441  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@3a52d17f, testMethod = testDeleteRental@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@49f77c52]; rollback [true]
+2017-10-09 08:16:12.488  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@3a52d17f, testMethod = testDeleteRental@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]].
+2017-10-09 08:16:12.491  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@55902527, testMethod = testGetEmailAddress@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@49f77c52]; rollback [true]
+2017-10-09 08:16:12.501  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@55902527, testMethod = testGetEmailAddress@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]].
+2017-10-09 08:16:12.503  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@aff3753, testMethod = testCreateUser@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@49f77c52]; rollback [true]
+2017-10-09 08:16:12.518  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@aff3753, testMethod = testCreateUser@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]].
+2017-10-09 08:16:12.520  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@4de581bb, testMethod = testDeleteUser@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@49f77c52]; rollback [true]
+2017-10-09 08:16:12.552  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@4de581bb, testMethod = testDeleteUser@UserServiceTest, testException = org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [DELETE FROM USERS WHERE USER_ID = ?]; Referentielle IntegritÃ¤t verletzt: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;
+Referential integrity constraint violation: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;; SQL statement:
+DELETE FROM USERS WHERE USER_ID = ? [23503-196]; nested exception is org.h2.jdbc.JdbcSQLException: Referentielle IntegritÃ¤t verletzt: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;
+Referential integrity constraint violation: &quot;FK_USER: PUBLIC.RENTALS FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USERS(USER_ID) (1)&quot;; SQL statement:
+DELETE FROM USERS WHERE USER_ID = ? [23503-196], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]].
+2017-10-09 08:16:12.558  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@19883c3d, testMethod = testGetRentalsOfUserUsingLazyLoading@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@49f77c52]; rollback [true]
+2017-10-09 08:16:12.567  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@19883c3d, testMethod = testGetRentalsOfUserUsingLazyLoading@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]].
+2017-10-09 08:16:12.572  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@6abed5f0, testMethod = testGetUsersByName@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@49f77c52]; rollback [true]
+2017-10-09 08:16:12.607  INFO 9148 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@7fa11fd6 testClass = UserServiceTest, testInstance = ch.fhnw.edu.rental.test.UserServiceTest@6abed5f0, testMethod = testGetUsersByName@UserServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71973476 testClass = UserServiceTest, locations = '{}', classes = '{class ch.fhnw.edu.rental.MovieRentalApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{gui=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@17d5ddf9, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2c7d24bf, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@580fab5f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@39c6bb13], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]].
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 2.14</a> at 09.10.2017 08:16:13</p>
+</div>
+</div>
+</body>
+</html>
