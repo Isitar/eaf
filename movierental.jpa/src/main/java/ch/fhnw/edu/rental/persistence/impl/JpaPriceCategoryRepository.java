@@ -8,49 +8,8 @@ import ch.fhnw.edu.rental.model.PriceCategory;
 import ch.fhnw.edu.rental.persistence.PriceCategoryRepository;
 
 @Repository
-public class JpaPriceCategoryRepository implements PriceCategoryRepository {
-
-	@Override
-	public PriceCategory findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<PriceCategory> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PriceCategory save(PriceCategory entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(PriceCategory entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
+public class JpaPriceCategoryRepository extends JpaRepository<PriceCategory> implements PriceCategoryRepository {
+    public JpaPriceCategoryRepository() {
+        this.repositoryClass = PriceCategory.class;
+    }
 }

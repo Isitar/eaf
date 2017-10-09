@@ -3,66 +3,85 @@ package ch.fhnw.edu.rental.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "USERS")
 public class User {
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "USER_ID")
+    private Long id;
+    @Column(name = "USER_NAME")
+    private String lastName;
+    @Column(name = "USER_FIRSTNAME")
+    private String firstName;
+    @Column(name = "USER_EMAIL")
+    private String email;
+    @OneToMany
+    private List<Rental> rentals;
 
-	private String lastName;
-	private String firstName;
-	private String email;
-	private List<Rental> rentals;
+    public User() {
 
-	public User(String lastName, String firstName) {
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.rentals = new ArrayList<>();
-	}
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public User(String lastName, String firstName) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.rentals = new ArrayList<>();
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setLastName(String name) {
-		this.lastName = name;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public void setLastName(String name) {
+        this.lastName = name;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public List<Rental> getRentals() {
-		return rentals;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setRentals(List<Rental> rentals) {
-		this.rentals = rentals;
-	}
+    public List<Rental> getRentals() {
+        return rentals;
+    }
 
-	public int getCharge() {
-		int result = 0;
-		for (Rental rental : rentals) {
-			result += rental.getMovie().getPriceCategory().getCharge(rental.getRentalDays());
-		}
-		return result;
-	}
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public int getCharge() {
+        int result = 0;
+        for (Rental rental : rentals) {
+            result += rental.getMovie().getPriceCategory().getCharge(rental.getRentalDays());
+        }
+        return result;
+    }
 
 }
