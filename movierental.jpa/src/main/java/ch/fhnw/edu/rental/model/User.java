@@ -3,12 +3,16 @@ package ch.fhnw.edu.rental.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "USERS")
@@ -23,7 +27,7 @@ public class User {
     private String firstName;
     @Column(name = "USER_EMAIL")
     private String email;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REMOVE, CascadeType.MERGE })
     private List<Rental> rentals;
 
     public User() {
