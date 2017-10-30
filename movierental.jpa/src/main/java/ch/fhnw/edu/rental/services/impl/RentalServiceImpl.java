@@ -17,41 +17,46 @@ import ch.fhnw.edu.rental.services.RentalService;
 @Service
 @Transactional
 public class RentalServiceImpl implements RentalService {
-	private Log log = LogFactory.getLog(this.getClass());
-	
-	@Autowired
-	private RentalRepository rentalRepo;
-	
-	@Override
-	public List<Rental> getAllRentals() {
-		List<Rental> rentals = rentalRepo.findAll();
-			log.debug("getAllRentals() done");
-		return rentals;
-	}
+    private Log log = LogFactory.getLog(this.getClass());
 
-	@Override
-	public int calcRemainingDaysOfRental(Rental rental, Date date) {
-		return rental.calcRemainingDaysOfRental(date);
-	}
+    @Autowired
+    private RentalRepository rentalRepo;
 
-	@Override
-	public Rental getRentalById(Long id) {
-		return rentalRepo.findOne(id);
-	}
+    @Override
+    public List<Rental> getAllRentals() {
+        List<Rental> rentals = rentalRepo.findAll();
+        log.debug("getAllRentals() done");
+        return rentals;
+    }
 
-	@Override
-	public void deleteRental(Rental rental) {
-		if (rental == null) {
-			throw new RuntimeException("'rental' parameter is not set!");
-		}
+    @Override
+    public int calcRemainingDaysOfRental(Rental rental, Date date) {
+        return rental.calcRemainingDaysOfRental(date);
+    }
 
-		rental.getUser().getRentals().remove(rental);
-		rental.getMovie().setRented(false);
+    @Override
+    public Rental getRentalById(Long id) {
+        return rentalRepo.findOne(id);
+    }
 
-		rentalRepo.delete(rental);
-		
-		if (log.isDebugEnabled()) {
-			log.debug("rental[" + rental.getId() + "] deleted");
-		}		
-	}
+    @Override
+    public void deleteRental(Rental rental) {
+        if (rental == null) {
+            throw new RuntimeException("'rental' parameter is not set!");
+        }
+
+        rental.getUser().getRentals().remove(rental);
+        rental.getMovie().setRented(false);
+
+        // save rental in persistence context
+        rentalRepo.save(rental);
+        
+        rentalRepo.delete(rental);
+        // set rented to false
+        rental.getMovie().setRented(false);
+
+        if (log.isDebugEnabled()) {
+            log.debug("rental[" + rental.getId() + "] deleted");
+        }
+    }
 }

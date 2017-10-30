@@ -1,22 +1,20 @@
 package ch.fhnw.jpa.inheritance;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Topic extends MotherTopic {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class ChildTopic2 extends MotherTopic {
 
     private String title;
     private String owner;
 
-    protected Topic() {
+    protected ChildTopic2() {
     }
 
-    public Topic(String title, String owner) {
+    public ChildTopic2(String title, String owner) {
         this.title = title;
         this.owner = owner;
     }
