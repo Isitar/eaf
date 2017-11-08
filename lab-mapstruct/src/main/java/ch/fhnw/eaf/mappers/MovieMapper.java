@@ -8,16 +8,22 @@ import ch.fhnw.eaf.rental.dto.UserDto;
 import ch.fhnw.eaf.rental.model.Rental;
 import ch.fhnw.eaf.rental.model.User;
 
-@Mapper(componentModel="spring")
+@Mapper(componentModel = "spring")
 public interface MovieMapper {
 
-	@Mapping(source = "rentals", target = "rentalIds")
-	UserDto userToUserDto(User user);
-	
-	RentalDto rentalToRentalDto(Rental rental);
-	
-	default Long rentalToLong(Rental r) {
-		return r.getId();
-	}
+    @Mapping(source = "rentals", target = "rentalIds")
+    UserDto userToUserDto(User user);
+
+    // @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user", target = "userId")
+    RentalDto rentalToRentalDto(Rental rental);
+
+    default Long rentalToLong(Rental r) {
+        return r.getId();
+    }
+
+    default Long userToLong(User u) {
+        return u.getId();
+    }
 
 }
