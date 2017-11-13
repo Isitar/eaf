@@ -1,0 +1,7 @@
+jar { 
+	baseName = 'usermgt'
+	 manifest {
+		attributes("Implementation-Title": baseName, 
+				   "Implementation-Version": version) 
+		} 
+	}

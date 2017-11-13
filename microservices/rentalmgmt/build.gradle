@@ -1,0 +1,8 @@
+jar {
+    baseName = 'rentalmanagement'
+    manifest {
+        attributes("Implementation-Title": baseName,
+                   "Implementation-Version": version)
+    }
+}
+

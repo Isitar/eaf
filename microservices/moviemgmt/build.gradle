@@ -1,0 +1,7 @@
+jar { 
+	baseName = 'moviemgt'
+	 manifest {
+		attributes("Implementation-Title": baseName, 
+		"Implementation-Version": version) 
+		} 
+	} 
