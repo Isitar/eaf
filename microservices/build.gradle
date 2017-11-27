@@ -23,14 +23,7 @@ subprojects { // Defining common behavior of all subprojects
 	repositories {
 	 mavenCentral() 
 	}
-	dependencies {
-		compile('org.springframework.boot:spring-boot-starter-data-jpa')
-		compile('org.springframework.boot:spring-boot-starter-web')
-		runtime('org.springframework.boot:spring-boot-devtools')
-		runtime('com.h2database:h2') 
-		compileOnly('org.projectlombok:lombok')
-		testCompile('org.springframework.boot:spring-boot-starter-test') 
-	}
 
+	
 	springBoot { executable = true }
 }
