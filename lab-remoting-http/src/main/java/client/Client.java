@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.remoting.caucho.HessianProxyFactoryBean;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
+import org.springframework.util.StopWatch;
 
 import bank.Account;
 import bank.AccountService;
@@ -29,9 +30,15 @@ public class Client {
 	@Bean
 	CommandLineRunner run(AccountService service) {
 		return args -> {
-			service.insertAccount(new Account("Mueller"));
-			List<Account> accounts = service.getAccounts("Mueller");
-			System.out.println(accounts.size() + " accounts returned");
+			StopWatch sw = new StopWatch();
+			sw.start();
+			for (int i = 0; i < 1000; ++i) {
+				service.insertAccount(new Account("Mueller"));
+				List<Account> accounts = service.getAccounts("Mueller");
+			}
+			sw.stop();
+			System.out.println("elapsed ms: " + sw.getLastTaskTimeMillis());
+			// System.out.println(accounts.size() + " accounts returned");
 		};
 	}
 
@@ -42,17 +49,17 @@ public class Client {
 		proxy.setServiceUrl(url);
 		proxy.setServiceInterface(AccountService.class);
 		proxy.afterPropertiesSet();
-		return (AccountService)proxy.getObject();
+		return (AccountService) proxy.getObject();
 	}
-	
-	// @Bean
+
+	//@Bean
 	AccountService getHessianProxy() {
 		HessianProxyFactoryBean proxy = new HessianProxyFactoryBean();
 		String url = String.format("http://%s:%s/lab-remoting/Hessian", host, port);
 		proxy.setServiceUrl(url);
 		proxy.setServiceInterface(AccountService.class);
 		proxy.afterPropertiesSet();
-		return (AccountService)proxy.getObject();
+		return (AccountService) proxy.getObject();
 	}
 
 }
